@@ -55,6 +55,10 @@ Fork 该仓库，进入仓库后点击 `Settings`，右侧栏点击 `Secrets`，
 | `DDBOT_TOKEN`           | `a1bxxxxxxxxxxxx`                              | 钉钉机器人推送 ，填写申请[自定义机器人接入](https://qmsg.zendee.cn/me.html#/) 申请的回调地址中 `access_token` 的值  | 可选                   |
 | `TELEGRAMBOT_TOKEN`  | `123456:ABC-DEF1234xxx-xxx123ew11`             | TGBot 推送，填写自己向[@BotFather](https://t.me/BotFather) 申请的 Bot Token     | 可选，和下面的一起使用 |
 | `TELEGRAMBOT_CHATID` | `11xxxxxx03`                                   | TGBot 推送，填写[@getuseridbot](https://t.me/getuseridbot)私聊获取到的纯数字 ID | 可选，和上面一起使用   |
+| `PUSHPLUS_TOKEN` | `xxxxxxxxxxxxxxxx` | PUSHPLUS 推送，填写申请的 [pushplus](https://pushplus.hxtrip.com/) TOKEN | 可选 |
+| `WEWORK_ID` | `xxxxxx` | 企业微信ID，填写注册的企业微信 ID | 可选，与 `WEWORK_AGENT_ID` 和 `WEWORK_SECRET` 配合使用 |
+| `WEWORK_AGENT_ID` | `100001` | 企业微信应用ID，填写申请应用的ID | 可选，与 `WEWORK_ID` 和 `WEWORK_SECRET` 配合使用 |
+| `WEWORK_SECRET` | `xxxxxxxxxxxxxxx` | 企业微信对应的 SECRET | 可选，与 `WEWORK_ID` 和 `WEWORK_AGENT_ID` 配合使用 |
 | `DISPLAY_CONTEXT`    | `1`                                            | 任务执行时是否显示详细信息，`1` 显示 `0` 关闭，默认值 `1`                       | 可选                   |
 
 
@@ -98,9 +102,9 @@ vim .env
 
 ```ini
 # 用户信息。格式：域名----账号----密码，多个账号使用 ; 分隔，支持换行但前后引号不能删掉
-USERS="https://abc.com----abc@abc.com---abc123456;
-https://abc.com----abc@abc.com---abc123456;
-https://abc.com----abc@abc.com---abc123456;"
+USERS="https://abc.com----abc@abc.com----abc123456;
+https://abc.com----abc@abc.com----abc123456;
+https://abc.com----abc@abc.com----abc123456;"
 # Server 酱推送 SC KEY
 PUSH_KEY="PUSH_KEY"
 # Qmsg 酱推送 QMSG_KEY
@@ -111,6 +115,14 @@ DDBOT_TOKEN="DDBOT_TOKEN"
 TELEGRAMBOT_TOKEN="TELEGRAMBOT_TOKEN"
 # TelegramBot 推送用户 ID
 TELEGRAMBOT_CHATID="TELEGRAMBOT_CHATID"
+# PUSHPLUS 推送 Token
+PUSHPLUS_TOKEN="PUSHPLUS_TOKEN"
+# 企业微信 ID
+WEWORK_ID="WEWORK_ID"
+# 企业微信应用 ID
+WEWORK_AGENT_ID="WEWORK_AGENT_ID"
+# 企业微信密钥
+WEWORK_SECRET="WEWORK_SECRET"
 # 执行任务时是否显示签到详情
 DISPLAY_CONTEXT=1
 ```
@@ -120,9 +132,9 @@ DISPLAY_CONTEXT=1
 > ```bash
 > cat > .env <<EOF
 > # 用户信息。格式：域名----账号----密码，多个账号使用 ; 分隔，支持换行但前后引号不能删掉
-> USERS="https://abc.com----abc@abc.com---abc123456;
-> https://abc.com----abc@abc.com---abc123456;
-> https://abc.com----abc@abc.com---abc123456;"
+> USERS="https://abc.com----abc@abc.com----abc123456;
+> https://abc.com----abc@abc.com----abc123456;
+> https://abc.com----abc@abc.com----abc123456;"
 > # Server 酱推送 SC KEY
 > PUSH_KEY="PUSH_KEY"
 > # Qmsg 酱推送 QMSG_KEY
@@ -133,6 +145,14 @@ DISPLAY_CONTEXT=1
 > TELEGRAMBOT_TOKEN="TELEGRAMBOT_TOKEN"
 > # TelegramBot 推送用户 ID
 > TELEGRAMBOT_CHATID="TELEGRAMBOT_CHATID"
+> # PUSHPLUS 推送 Token
+> PUSHPLUS_TOKEN="PUSHPLUS_TOKEN"
+> # 企业微信 ID
+> WEWORK_ID="WEWORK_ID"
+> # 企业微信应用 ID
+> WEWORK_AGENT_ID="WEWORK_AGENT_ID"
+> # 企业微信密钥
+> WEWORK_SECRET="WEWORK_SECRET"
 > # 执行任务时是否显示签到详情
 > DISPLAY_CONTEXT=1
 > EOF
@@ -144,27 +164,36 @@ DISPLAY_CONTEXT=1
 
 ```bash
 $ chmod +x ssp-autocheckin.sh && ./ssp-autocheckin.sh
-SSPanel Auto Checkin v2.1.5 签到通知
-## 用户 1
+🚀SSPanel Auto Checkin v2.2.2
 
-- 【签到站点】: DOMAIN
-- 【签到用户】: EMAIL
-- 【签到时间】: 2020-12-26 19:03:19
-- 【签到状态】: 续命1天, 获得了 111 MB流量.
-- 【用户等级】: VIP1
-- 【用户余额】: 2.98 CNY
-- 【用户限速】: 100 Mbps
-- 【总流量】: 317.91 GB
-- 【剩余流量】: 248.817 GB
-- 【已使用流量】: 69.0929 GB
-- 【等级过期时间】: 2021-05-12 16:03:35
-- 【账户过期时间】: 2021-07-26 16:03:35
-- 【上次签到时间】: 2020-12-26 02:53:23
+用户 1
+签到站点: DOMAIN
+签到用户: EMAIL
+签到时间: 2021-05-19 12:46:10
+签到状态: 续命1天, 获得了 111 MB流量.
 
-【Server 酱推送结果】: 成功
-【Qmsg 酱推送结果】: 成功
-【钉钉机器人推送结果】: 成功
-【TelegramBot 推送结果】: 成功
+用户 2
+签到站点: DOMAIN
+签到用户: EMAIL
+签到时间: 2021-05-19 12:46:14
+签到状态: 续命1天, 获得了 111 MB流量.
+用户等级: VIP1
+用户余额: 2.98 CNY
+用户限速: 100 Mbps
+总流量: 317.91 GB
+剩余流量: 248.817 GB
+已使用流量: 69.0929 GB
+等级过期时间: 2021-05-12 16:03:35
+账户过期时间: 2021-07-26 16:03:35
+上次签到时间: 2020-12-26 02:53:23
+
+通知结果:
+Server 酱推送结果: 成功
+Qmsg 酱推送结果: 成功
+钉钉机器人推送结果: 成功
+TelegramBot 推送结果: 成功
+PushPlus 推送结果: 成功
+企业微信推送结果: 成功
 
 ---------------------------------------
 ```
